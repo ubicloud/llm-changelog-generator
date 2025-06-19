@@ -1,0 +1,111 @@
+---
+title: "February 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## AI Inference Endpoints
+
+### New Model Support and Performance Improvements
+
+We've expanded our AI model catalog with several new additions to better serve your inference needs:
+
+- **Mistral Small 3** - A powerful yet efficient model from Mistral AI, now with tool calling support enabled and optimized GPU memory utilization at 97%
+- **Microsoft Phi 4** - Microsoft's latest compact model optimized for performance
+- **Llama 3.3 70B Turbo** - A high-performance quantized version of Meta's Llama 3.3 70B model, offering similar capabilities to larger models with significantly reduced resource requirements
+- **DeepSeek R1 Models** - Added support for both 1.5B and 32B parameter versions, including CPU-optimized variants for cost-effective inference
+
+We've also improved our infrastructure with FlashInfer support, delivering better performance for supported models, and upgraded to vLLM 0.7.3 for enhanced stability and features.
+
+<PrList ids={[2824, 2830, 2816, 2869, 2734, 2781, 2840]} />
+
+### Free Quota for AI Inference
+
+New projects now receive 500,000 free tokens per month for AI inference! This quota helps you get started with our AI services without immediate billing setup. Projects without valid billing information will see requests rejected after the free quota is exhausted, with clear usage tracking available in your dashboard.
+
+<PrList ids={[2818]} />
+
+## Managed PostgreSQL
+
+### Burstable Instance Types
+
+We're excited to introduce Burstable instance types for PostgreSQL, offering a cost-effective option for workloads with variable compute needs. These instances provide guaranteed baseline performance with the ability to burst to higher CPU usage when needed:
+
+- **Burstable-1**: 1 vCPU (50% baseline, burst to 100%), 2GB memory
+- **Burstable-2**: 2 vCPUs (100% baseline, burst to 200%), 4GB memory
+
+Perfect for development environments, small applications, and workloads with periodic spikes in activity.
+
+<PrList ids={[2815]} />
+
+### PgBouncer Connection Pooling
+
+All PostgreSQL instances now include built-in PgBouncer support, providing efficient connection pooling to improve performance and reduce connection overhead. PgBouncer runs on port 6432 and is especially beneficial for applications with many short-lived connections. This feature is automatically available on all new and existing PostgreSQL instances.
+
+<PrList ids={[2753, 2779]} />
+
+### Timeline Creation Fix for Restored Databases
+
+We've resolved an issue that prevented backups from being taken after database restoration. Restored databases now properly create new timelines, ensuring continuous backup protection for your data.
+
+<PrList ids={[2836]} />
+
+## Ubicloud CLI (Beta)
+
+### Comprehensive Cloud Management
+
+The Ubicloud CLI is now available in beta, providing a powerful command-line interface for managing your cloud resources. The CLI uses a thin-client approach, ensuring you always have access to the latest features without needing to update the client.
+
+**Virtual Machine Management:**
+- `ubi vm list` - List all VMs with customizable output fields
+- `ubi vm create` - Create new VMs with support for multiple SSH keys
+- `ubi vm show` - View detailed VM information
+- `ubi vm destroy` - Delete VMs with confirmation prompts
+- `ubi vm restart` - Restart VMs
+- `ubi vm ssh/sftp/scp` - Direct SSH access and file transfer
+
+**PostgreSQL Database Management:**
+- `ubi pg list` - List all databases
+- `ubi pg create` - Create new databases with version selection
+- `ubi pg show` - View database details
+- `ubi pg destroy` - Delete databases safely
+- `ubi pg restart` - Restart database instances
+- `ubi pg failover` - Trigger manual failover
+- `ubi pg restore` - Restore from backups
+- `ubi pg reset-superuser-password` - Reset credentials
+- `ubi pg psql/pg_dump/pg_dumpall` - Direct database access tools
+
+**Additional Services:**
+- **Firewall management** - Create and manage firewall rules
+- **Load balancer management** - Configure load balancers and health checks
+- **Private subnet operations** - Connect and disconnect resources
+
+The CLI supports both resource names and UBIDs for flexibility, with automatic location resolution when using UBIDs directly.
+
+<PrList ids={[2671, 2746, 2748, 2751, 2752, 2775, 2788, 2798, 2802, 2803, 2813, 2842, 2849, 2857, 2860, 2864, 2875]} />
+
+## Compute
+
+### Location Flexibility
+
+We've made significant improvements to our location infrastructure, moving provider locations from static configuration files to our database. This enables more flexible region management and lays the groundwork for customer-specific regions in the future.
+
+<PrList ids={[2806]} />
+
+## Platform Improvements
+
+### Enhanced Resource Management
+
+- **Deadline-based alerting**: Improved monitoring for VM and host unavailability with automatic resolution when resources are deleted
+- **Better error handling**: Invalid UBIDs now return proper 404 errors instead of 500 errors
+- **Improved allocation**: Enhanced VM placement algorithms for better resource utilization
+
+<PrList ids={[2855, 2858, 2845]} />
+
+### MinIO Object Storage Enhancements
+
+- Fixed cluster configuration issues when working with decommissioned pools
+- Improved DNS record cleanup during server destruction
+- Enhanced peer communication performance using public IPs
+
+<PrList ids={[2839, 2871]} />

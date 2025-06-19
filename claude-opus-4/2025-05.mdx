@@ -1,0 +1,123 @@
+---
+title: "May 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## Managed PostgreSQL
+
+### Enhanced Metrics Dashboard
+
+We've significantly expanded the PostgreSQL metrics dashboard to help you better understand your database performance. The dashboard now includes disk IOPS statistics, transaction rates, and a detailed CPU usage breakdown that shows time spent on I/O wait, user processes, system operations, and CPU steal - particularly useful for burstable instances. You can access these metrics directly from your PostgreSQL resource overview page.
+
+![PostgreSQL Metrics Dashboard](/changelog/2025-05-postgres-metrics-expanded.png)
+
+<PrList ids={[3274, 3290, 3312, 3333]} />
+
+### Inline Editing for Firewall Rules
+
+Managing your PostgreSQL firewall rules is now more intuitive. You can add descriptions to your firewall rules for better documentation and edit both IP ranges and descriptions inline without leaving the page. This makes it easier to maintain and understand your security configurations at a glance.
+
+![PostgreSQL Firewall Rules Inline Edit](/changelog/2025-05-postgres-firewall-inline-edit.png)
+
+<PrList ids={[3366, 3379]} />
+
+### Flexible Password Authentication
+
+To support legacy systems, PostgreSQL instances now allow MD5 authentication in addition to the default SCRAM-SHA-256. While new users are still created with the more secure SCRAM-SHA-256 by default, this change enables smoother migrations from older PostgreSQL systems without requiring immediate password changes.
+
+<PrList ids={[3343]} />
+
+### Maintenance Window Visibility
+
+The PostgreSQL UI now clearly indicates when your database is waiting for a maintenance window to perform operations. This transparency helps you understand why certain operations might be delayed and allows you to plan accordingly.
+
+<PrList ids={[3275]} />
+
+## GitHub Runners
+
+### Premium CPU Runners
+
+We're excited to introduce Premium CPU runners for GitHub Actions, offering significantly higher performance for your CI/CD workloads. These runners are available with a simple toggle in your GitHub installation settings and provide access to our latest generation CPUs. When enabled, we'll automatically upgrade your runners to premium hardware when capacity is available, with transparent billing that shows which runner type was used for each job.
+
+![Premium Runner Toggle](/changelog/2025-05-github-premium-runner-toggle.png)
+
+<PrList ids={[3255, 3256, 3268, 3273, 3313]} />
+
+### Improved Runner Management Interface
+
+The GitHub Runners page has been redesigned for better usability on all screen sizes. Runner status is now more clearly communicated with human-readable descriptions showing how long a runner has been waiting for a job or actively running. Additionally, you can now see which VM family (standard or premium) each runner is using directly in the interface.
+
+<PrList ids={[3303, 3300]} />
+
+## Compute
+
+### GPU Virtual Machines
+
+GPU-enabled virtual machines are now available in preview for projects with the `gpu_vm` feature flag. You can provision VMs with NVIDIA A100 80GB GPUs through both the UI and API. The interface intelligently shows only available GPU options for each region, and includes detailed GPU information in the VM details page.
+
+![GPU VM Creation](/changelog/2025-05-gpu-vm-creation.png)
+
+<PrList ids={[3365]} />
+
+## Ubicloud Kubernetes
+
+### Kubernetes v1.33 Support
+
+Kubernetes v1.33 is now available and set as the default version for new clusters. You can select your preferred Kubernetes version (v1.32 or v1.33) during cluster creation through the UI.
+
+<PrList ids={[3254, 3264, 3367]} />
+
+### Worker Node Size Selection
+
+You now have the flexibility to choose different VM sizes for your Kubernetes worker nodes during cluster creation. This allows you to optimize your cluster configuration for your specific workload requirements while seeing real-time pricing updates based on your selections.
+
+<PrList ids={[3311]} />
+
+### Wildcard DNS for Sub-subdomains
+
+Kubernetes clusters now support wildcard DNS records for sub-subdomains under your services URL. This enhancement enables deployment of applications like Okteto that require multiple subdomains for different environments and services.
+
+<PrList ids={[3277]} />
+
+## AI & Inference
+
+### AI Playground Enhancements
+
+The AI Playground now supports multimodal input, allowing you to upload images and PDFs along with your text prompts for models that support these capabilities. Each model card in the AI catalog now includes a direct "Try in Playground" link that pre-selects the model for immediate testing.
+
+![AI Playground Multimodal](/changelog/2025-05-ai-playground-multimodal.png)
+
+<PrList ids={[3383]} />
+
+### Embedding Model Support
+
+The inference router now supports embedding endpoints at `/v1/embeddings`, expanding the range of AI workloads you can run on Ubicloud infrastructure.
+
+<PrList ids={[3341]} />
+
+### Inference API Key Management
+
+Managing inference API keys is now available through our CLI, SDK, and API. You can programmatically create, list, view, and delete API keys for your AI inference endpoints, making it easier to automate access management for your AI applications.
+
+<PrList ids={[3190]} />
+
+## Platform Improvements
+
+### Project Limit Increase
+
+To better support growing organizations, we've increased the default project limit from 5 to 10 projects per account. This limit is enforced through the API and web interface, though manual overrides are available if you need additional projects.
+
+<PrList ids={[3243]} />
+
+### Discount Code Support
+
+You can now apply discount codes to your projects through the billing page. When applied, discount codes add credits to your account that are automatically used for future charges.
+
+<PrList ids={[3233, 3272]} />
+
+### Load Balancer Optimization
+
+Load balancers configured for non-HTTPS health checks no longer provision SSL certificates, reducing unnecessary resource usage and improving provisioning times for HTTP-only load balancers.
+
+<PrList ids={[3345, 3348]} />

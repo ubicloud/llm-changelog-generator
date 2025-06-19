@@ -1,0 +1,9 @@
+We generate a change log for our product every month. For this, we use completed pull requests for the month. We then group pull requests into four categories: (1) customer facing features: now available, (2) customer facing features: not yet released, (3) bug fixes and maintenance, and (4) internal improvements. Our change log then includes (1) customer facing features that are available.
+
+I'm including (a) our pull requests for May in json format to this prompt. In this prompt, you're going to find (i) each completed pull request that has a pr number, title, description, and an auto generated ellipsis summary.
+
+We used these pull requests to create the attached markdown-like file (b) 2025-05.mdx. This markdown file contains groups customer facing features into our cloud services such as Managed PostgreSQL, GitHub Runners, Ubicloud Kubernetes, AI & GPUs, Compute, and other major services. For each cloud service, the mdx file contains a list pf pull requests. These PrList ids correspond to the pr identifiers in (a)(i) pr number. For example, the Managed PostgreSQL has an id 3170 in 2025-05.mdx. This 3170 corresponds to the "pr" : 3170 in may-pull-requests.json.
+
+Again, we start with may-pull-requests.json, group each pull request into four categories, take mostly customer facing improvements, group those pull requests into our cloud services, and then create a change log in mdx format that we provide to our customers.
+
+If I wanted to automate this process through an LLM, what type of a prompt should I generate to feed into the LLM? I'd like the LLM then to take input as pull-requests.json and produce an mdx file for the month that's our change log.

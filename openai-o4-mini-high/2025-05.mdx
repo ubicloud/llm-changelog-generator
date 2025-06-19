@@ -1,0 +1,33 @@
+---
+title: "May 2025 Change Log"
+date: "2025-05-31"
+---
+
+## GitHub Runners
+
+- **#3255 [PremiumCPU #1] Introduce a new "performance" vm family**  
+  Introduces a "performance" VM family for premium CPU runners, adds allocation logic prioritizing performance hosts, and updates billing rates.
+
+## Ubicloud Kubernetes
+
+- **#2632 Add kubernetes cluster and node pool upgrades**  
+  Implements sequential Kubernetes cluster and node pool upgrade logic, enabling zero-downtime upgrades starting with control-plane nodes.
+
+- **#3254 Allow customers to select the Kubernetes version in UI**  
+  Adds UI and backend support for choosing Kubernetes version (`v1.32` or `v1.33`) when creating clusters, with validation.
+
+## AI & GPUs
+
+- **#3190 Add API/SDK/CLI access for inference api keys**  
+  Enables API, SDK, and CLI commands for creating, listing, showing, and deleting inference API keys for automation.
+
+## Other Services
+
+- **#3170 Create VictoriaMetrics resource**  
+  Introduces single-node VictoriaMetrics resource management with systemd services, certificate handling, and basic HTTP authentication.
+
+- **#3233 Allow customers to apply discount code**  
+  Adds the ability to apply discount codes to projects, validating codes, updating credits, and handling errors.
+
+- **#3249 Change root redirect to default project dashboard redirect**  
+  Updates routing so logged-in users are sent directly to their default project dashboard instead of the login page.

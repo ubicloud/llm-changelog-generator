@@ -1,0 +1,80 @@
+---
+title: "February 2025"
+---
+import { PrList } from "/snippets/pr-list.mdx";
+
+## AI Inference Endpoints
+
+### New AI Models: Phi 4, Llama 3.3 70B, and DeepSeek R1 Models
+We've expanded our AI model offerings with three powerful new models. **Microsoft Phi 4** provides excellent performance for its size, while **Llama 3.3 70B Turbo** offers similar capabilities to Llama 3.1 405B but with significantly lower resource requirements. We've also added **DeepSeek R1 Qwen models** in 1.5B and 32B sizes, perfect for CPU-based inference workloads. The 32B model now includes draft model support for speculative decoding, improving inference speeds.
+
+### Free Quota for AI Inference
+We're excited to introduce a free monthly quota of 500,000 tokens per project for AI inference. Projects without billing information can now explore our AI capabilities risk-free. Once you exceed the free quota, you'll need to add valid billing information to continue using the service. The free tokens are automatically applied as a credit on your invoice.
+
+### Tool Calling Support for Mistral Small 3
+Mistral Small 3 now supports tool calling (function calling), enabling more complex AI applications. We've also optimized GPU memory utilization from 90% to 97% for this model, allowing better performance and throughput.
+
+### FlashInfer Support for Optimized Inference
+Our AI infrastructure now supports FlashInfer, a high-performance inference acceleration library that improves throughput and reduces latency for supported models. This enhancement is automatically applied to compatible models without any configuration changes needed.
+
+<PrList ids={[2734, 2781, 2816, 2818, 2824, 2830, 2869, 2882, 2899, 2905, 2908, 2910]} />
+
+## Managed PostgreSQL
+
+### pgBouncer Connection Pooling
+PostgreSQL databases now include pgBouncer, a lightweight connection pooler that significantly improves performance for applications with many short-lived connections. pgBouncer runs on port 6432 and helps reduce connection overhead, making your databases more efficient. This feature is automatically enabled for all PostgreSQL instances.
+
+### Burstable PostgreSQL Instances
+We've introduced cost-effective Burstable PostgreSQL options running on our new Burstable VM family. These instances are perfect for development, testing, or light production workloads that don't require consistent high performance. Burstable instances provide baseline performance with the ability to burst when needed.
+
+<PrList ids={[2753, 2779, 2815]} />
+
+## Ubicloud CLI (Beta)
+
+### Complete PostgreSQL Management via CLI
+The Ubicloud CLI now supports comprehensive PostgreSQL database management. You can create, list, show details, destroy databases, manage firewall rules, configure metric destinations, perform failovers, restore backups, and reset passwords - all from the command line. The CLI also includes direct database access tools like psql, pg_dump, and pg_dumpall for seamless database operations.
+
+### Firewall Management Commands
+Manage your cloud firewalls directly from the CLI with new commands for creating, listing, showing, destroying firewalls, and managing firewall rules and subnet attachments. This provides complete infrastructure-as-code capabilities for network security.
+
+### Load Balancer Operations
+The CLI now includes full support for load balancer management, including creation, configuration updates, VM attachments/detachments, and health check configurations. All load balancer features available in the web console are now accessible via CLI.
+
+### VM Restart and Private Subnet Management
+New CLI commands for restarting VMs and managing PostgreSQL private subnet connections (connect/disconnect) provide more operational flexibility without needing to access the web console.
+
+### Improved CLI Experience
+The CLI now accepts resource UBIDs without requiring location prefixes, making commands shorter and more intuitive. We've also added confirmation prompts for destructive operations (with a `-f/--force` flag to skip) and improved error messages and output formatting.
+
+<PrList ids={[2788, 2802, 2803, 2842, 2849, 2857, 2860, 2861, 2864, 2875]} />
+
+## Virtual Machines
+
+### Burstable VM Family
+Introducing our new Burstable VM family - a cost-effective option for workloads with variable CPU requirements. Burstable VMs provide a baseline CPU performance with the ability to burst to higher performance when needed. We're launching with two sizes:
+- **burstable-1**: 1 vCPU (50% baseline, 100% burst), 2GB RAM
+- **burstable-2**: 2 vCPUs (100% baseline, 200% burst), 4GB RAM
+
+These VMs are perfect for development environments, small web applications, and workloads with intermittent CPU demands. Multiple VMs can share physical resources, providing excellent value while maintaining performance isolation.
+
+<PrList ids={[2726, 2815]} />
+
+## Platform Improvements
+
+### Transparent GitHub Actions Cache (General Availability)
+The transparent GitHub Actions cache feature is now enabled by default for all new customers, providing automatic caching without any workflow modifications. This significantly speeds up your CI/CD pipelines with zero configuration required.
+
+### Kubernetes Cluster Creation Simplified
+We've streamlined the Kubernetes cluster creation process by automatically creating an appropriately-sized subnet (/16) for your cluster. Version selection has been temporarily simplified to always use the latest stable version (v1.32), making cluster creation more straightforward.
+
+### Usage Alerts User Experience
+Fixed the user experience for usage alert management, ensuring proper error messages and feedback when creating or deleting billing alerts.
+
+<PrList ids={[2739, 2740, 2883]} />
+
+## Development Experience
+
+### Go Implementation of Ubicloud CLI
+For improved performance, we've added a Go implementation of the Ubicloud CLI alongside the Ruby version. The Go version is significantly faster and provides the same functionality. Both versions pass the same test suite, ensuring compatibility.
+
+<PrList ids={[2857, 2879]} />

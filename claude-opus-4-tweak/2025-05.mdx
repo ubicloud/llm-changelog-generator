@@ -1,0 +1,119 @@
+---
+title: "May 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## Managed PostgreSQL
+
+### PostgreSQL Metrics Dashboard
+
+We've introduced a comprehensive metrics dashboard for PostgreSQL databases, providing real-time insights into your database performance. The dashboard includes CPU usage breakdown by mode (user, system, iowait, steal), memory utilization, disk I/O operations, network activity, and transaction statistics.
+
+![PostgreSQL Metrics Dashboard](/changelog/2025-05-postgres-metrics.png)
+
+The metrics system automatically collects data every 15 seconds and stores up to one month of historical data, with up to 480 data points per time series for detailed analysis.
+
+### Firewall Rules with Descriptions
+
+PostgreSQL firewall rules now support custom descriptions, making it easier to manage and understand your database security configuration. You can add meaningful descriptions when creating rules and edit them inline directly from the database overview page.
+
+![PostgreSQL Firewall Rules](/changelog/2025-05-postgres-firewall-rules.png)
+
+### Enhanced Authentication Support
+
+PostgreSQL instances now support both `md5` and `scram-sha-256` authentication methods in `pg_hba.conf`. This change allows users migrating from legacy systems to continue using `md5` authentication without changing passwords, while new users automatically benefit from the more secure `scram-sha-256` encryption.
+
+<PrList ids={[3274, 3290, 3299, 3309, 3333, 3366, 3379, 3343]} />
+
+## GitHub Runners
+
+### Premium Runner Performance Tier
+
+We've launched a new premium runner tier that provides access to higher-performance CPU hosts for demanding CI/CD workloads. Premium runners can be enabled through a simple toggle in your GitHub integration settings and will automatically upgrade your runners when capacity is available.
+
+![Premium Runner Toggle](/changelog/2025-05-premium-runners.png)
+
+The runner interface has been redesigned to be more compact and informative, showing runner family (standard vs premium), runtime status, and VM specifications all in an easy-to-scan format.
+
+### Improved Runner Management
+
+Runner rows now display more relevant information including how long a runner has been waiting for jobs, current job execution time, and VM family details. We've also hidden runners that are being destroyed to reduce confusion in the interface.
+
+<PrList ids={[3255, 3256, 3268, 3273, 3300, 3302, 3303, 3313, 3314]} />
+
+## Ubicloud Kubernetes
+
+### Kubernetes Version Selection
+
+You can now select your preferred Kubernetes version when creating clusters, with support for both v1.32 and v1.33. Kubernetes v1.33 is now the default version for new clusters, ensuring you get the latest features and security updates.
+
+### Worker Node Configuration
+
+Kubernetes cluster creation now allows you to specify the VM size for worker nodes independently, giving you more flexibility in resource allocation and cost optimization. Pricing updates dynamically based on your selected worker node size.
+
+### Performance Improvements
+
+We've significantly improved Kubernetes cluster bootstrap time by parallelizing worker node initialization. Workers now start their bootstrap process after the first control plane node completes, reducing total deployment time substantially.
+
+### Enhanced Service Support
+
+Kubernetes clusters now support sub-subdomains for services (e.g., `app.subdomain.cluster-services.example.com`), enabling more complex application architectures and better integration with tools like Okteto that require multiple service endpoints.
+
+<PrList ids={[3154, 3254, 3264, 3267, 3277, 3311, 3325, 3367]} />
+
+## AI & GPUs
+
+### GPU-Enabled Virtual Machines
+
+We've introduced support for GPU-enabled VMs, currently featuring NVIDIA A100 80GB PCIe cards. GPU VMs are available through both the UI and API when the `gpu_vm` feature flag is enabled for your project. The interface shows only available GPU options for your selected region.
+
+![GPU VM Creation](/changelog/2025-05-gpu-vms.png)
+
+VM details now display GPU information, showing specifications like "2x NVIDIA A100 80GB PCIe" when GPUs are attached.
+
+### AI Playground Enhancements
+
+The AI playground now supports multimodal input, allowing you to upload images and PDFs for processing with compatible models. Each model card includes a direct "Try in Playground" link for easier experimentation.
+
+### New Model Support
+
+Added billing rates for the new Llama-4 Maverick model, expanding our AI model offerings with competitive pricing for both input and output tokens.
+
+<PrList ids={[3365, 3372, 3383, 3354]} />
+
+## Load Balancers
+
+### HTTPS-Only Certificate Provisioning
+
+Load balancers now intelligently provision SSL certificates only when needed. If your health check protocol is not set to HTTPS, certificates won't be automatically created, reducing unnecessary resource usage and setup complexity.
+
+<PrList ids={[3345, 3348]} />
+
+## Platform Improvements
+
+### Enhanced Project Limits
+
+To maintain optimal performance and resource allocation, we've implemented a limit of 10 projects per account. This ensures better resource management while still providing flexibility for most use cases.
+
+### Discount Code System
+
+We've introduced a discount code system that allows customers to apply promotional credits to their accounts. The system automatically creates billing information when needed, streamlining the process for new users.
+
+### Location URL Format Update
+
+API endpoints now accept location identifiers in the more user-friendly UBID format instead of UUIDs, making URLs more readable and consistent across the platform.
+
+<PrList ids={[3243, 3272, 3337]} />
+
+## Developer Experience
+
+### Improved Development Setup
+
+Updated our development documentation to use `mise` for software version management, replacing `asdf` for better reliability and performance. The new setup process includes comprehensive instructions for managing dependencies including PostgreSQL and Node.js.
+
+### Enhanced Error Handling
+
+Improved error messages and handling across the platform, including better parameter validation that prevents SQL injection attempts and provides clearer 400 error responses for malformed requests.
+
+<PrList ids={[3139, 3323]} />
