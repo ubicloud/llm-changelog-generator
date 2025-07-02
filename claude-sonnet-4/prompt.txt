@@ -1,0 +1,153 @@
+# Automated Changelog Generation Prompt
+
+You are tasked with generating a monthly changelog for Ubicloud's cloud services based on completed pull requests. Your goal is to create a customer-facing changelog that highlights new features and improvements.
+
+## Input Format
+You will receive a JSON file containing pull requests with the following structure:
+```json
+[
+  {
+    "pr": <number>,
+    "title": "<string>",
+    "description": "<string>",
+    "ellipsis_summary": "<string>"
+  }
+]
+```
+
+## Process Overview
+1. **Categorize** each pull request into one of four categories
+2. **Filter** for customer-facing features that are now available
+3. **Group** relevant pull requests by cloud service
+4. **Generate** an MDX changelog file
+
+## Step 1: Categorization Criteria
+
+Categorize each pull request into exactly one of these categories:
+
+### Category 1: Customer-Facing Features (Now Available)
+- New features visible to users in the UI or API
+- Enhancements to existing functionality that users can immediately benefit from
+- New service offerings or capabilities
+- Performance improvements that directly impact user experience
+- New integrations or platform support
+
+**Keywords to look for**: "Add", "Enable", "Support", "Introduce", "Allow", "Feature", "Enhancement", "UI", "API", "Dashboard"
+
+### Category 2: Customer-Facing Features (Not Yet Released)
+- Features behind feature flags or not yet rolled out
+- Preview/beta features mentioned but not generally available
+- Features requiring manual enablement or special access
+
+**Keywords to look for**: "feature flag", "preview", "beta", "behind flag", "experimental"
+
+### Category 3: Bug Fixes and Maintenance
+- Bug fixes and error corrections
+- Security patches
+- Stability improvements
+- Performance optimizations without user-visible changes
+
+**Keywords to look for**: "Fix", "Bug", "Error", "Patch", "Stability", "Security"
+
+### Category 4: Internal Improvements
+- Developer experience improvements
+- Internal tooling and processes
+- Code refactoring and technical debt
+- Infrastructure changes not visible to users
+- Testing and CI/CD improvements
+
+**Keywords to look for**: "Refactor", "Internal", "Dev", "CI", "Test", "Migration", "Optimize" (internal)
+
+## Step 2: Service Grouping
+
+Group Category 1 pull requests into these Ubicloud services:
+
+### Managed PostgreSQL
+- PostgreSQL database features, monitoring, backups, scaling, configuration
+- Firewall rules, security, maintenance windows
+- Related keywords: "postgres", "pg", "database", "sql", "firewall", "metrics"
+
+### GitHub Runners
+- GitHub Actions integration, runner management, performance
+- Runner types, locations, billing, dashboard improvements  
+- Related keywords: "github", "runner", "actions", "ci", "premium", "performance"
+
+### Ubicloud Kubernetes
+- Kubernetes cluster management, nodes, networking, versions
+- Ingress, services, scaling, provisioning improvements
+- Related keywords: "kubernetes", "k8s", "cluster", "node", "ingress", "kubectl"
+
+### AI & GPUs
+- Inference endpoints, AI models, API keys, playground
+- GPU virtual machines, AI services, model management
+- Related keywords: "ai", "gpu", "inference", "model", "playground", "ml"
+
+### Compute (VMs and Infrastructure)
+- Virtual machine features, networking, storage, locations
+- Load balancers, firewalls, general infrastructure improvements
+- Related keywords: "vm", "virtual machine", "load balancer", "firewall", "subnet", "storage"
+
+### Other Services
+- Billing, authentication, monitoring, general platform features
+- Account management, APIs, SDKs, general improvements
+- Any features that don't fit the above categories
+
+## Step 3: Output Format
+
+Generate an MDX file with this structure:
+
+```mdx
+---
+title: "[Month] [Year]"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## [Service Name]
+
+### [Feature Name]
+
+[Brief description of the feature and its benefits to users. Focus on user value and impact.]
+
+![Optional Image Description](/changelog/image-path.png)
+
+<PrList ids={[pr1, pr2, pr3]} />
+
+## [Next Service Name]
+
+[Continue pattern...]
+```
+
+## Guidelines for Writing Feature Descriptions
+
+1. **User-Focused**: Write from the user's perspective, emphasizing benefits and value
+2. **Clear and Concise**: 2-4 sentences explaining what the feature does and why it matters
+3. **Action-Oriented**: Use active voice and specific verbs
+4. **Business Value**: When relevant, mention cost savings, performance improvements, or efficiency gains
+5. **Avoid Technical Jargon**: Keep language accessible to business users, not just developers
+
+### Good Example:
+"Ubicloud PostgreSQL now provides built-in metrics accessible via the UI and API. Monitor key performance indicators, including CPU utilization, storage I/O, network activity, connection count, and more."
+
+### Poor Example:
+"Fixed metrics collection implementation with VictoriaMetrics integration and updated nexus configuration."
+
+## Output Requirements
+
+1. **Only include Category 1 pull requests** (customer-facing, now available)
+2. **Group meaningfully**: Combine related PRs into cohesive features rather than listing each PR separately
+3. **Prioritize impact**: Lead with the most significant features for each service
+4. **Use consistent formatting**: Follow the MDX structure exactly
+5. **Include all relevant PR IDs** in PrList components
+6. **Write compelling headlines**: Make feature names descriptive and benefit-focused
+
+## Special Instructions
+
+- If a service has no Category 1 pull requests, omit that section entirely
+- If you're unsure about categorization, err on the side of being conservative (don't include in Category 1)
+- When multiple PRs contribute to a single feature, group them together under one feature heading
+- Always end feature sections with the appropriate PrList component containing all relevant PR IDs
+- Use title case for service names and feature headlines
+- Keep the import statement and title frontmatter exactly as shown
+
+Now, please process the provided pull request JSON and generate the monthly changelog MDX file.

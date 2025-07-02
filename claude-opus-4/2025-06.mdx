@@ -1,0 +1,85 @@
+---
+title: "June 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## Managed PostgreSQL
+
+### PostgreSQL UI Revamp
+
+We've completely redesigned the PostgreSQL management interface, splitting features across multiple dedicated pages for better navigation. The new layout includes separate sections for connections, metrics, backups, networking, and high availability settings, making it easier to find and manage specific features. [Read more in the Ubicloud PostgreSQL documentation.](https://www.ubicloud.com/docs/managed-postgresql)
+
+### Custom PostgreSQL Configuration
+
+You can now customize PostgreSQL and PgBouncer configurations directly through the API and UI. This feature includes built-in validation for all supported parameters across PostgreSQL versions 16 and 17, ensuring your configuration changes are safe and compatible.
+
+### AWS S3 Integration for Backups
+
+PostgreSQL databases running on AWS can now use native S3 for backups and restore operations, eliminating the need for intermediary storage solutions. This integration supports multiple AWS regions and provides seamless backup management using the AWS S3 SDK.
+
+### Connection Improvements
+
+Connection strings now explicitly include port numbers and database names for better clarity. Additionally, the CA certificate download functionality has been fixed and is easily accessible from the new connection page.
+
+<PrList ids={[3446, 3474, 3423, 3402, 3500]} />
+
+## GitHub Runners
+
+### Premium Runner Features
+
+Premium GitHub runners now include 100GB of free cache storage when enabled, significantly improving build performance for cache-heavy workflows. The system automatically manages cache cleanup based on your storage limits.
+
+### Enhanced Runner Reliability
+
+We've improved runner recycling with new deadlines and better error handling for deleted runners. Runners now have a 2-hour recycling deadline and a 5-day maximum wait state, ensuring stuck runners are automatically recovered.
+
+### Faster Runner Images
+
+Updated to the latest runner image version (20250622.1.0) with improved performance and reliability. Old runner images from April 2025 have been deprecated.
+
+<PrList ids={[3473, 3469, 3507, 3414]} />
+
+## AI & GPUs
+
+### Inference Playground V2
+
+The AI inference playground has been completely redesigned with support for multi-turn conversations, system messages, temperature and top-p controls, and real-time token usage display. The new interface shows streaming responses as they're generated and includes a copy button for easy sharing of results.
+
+### DeepSeek Model Support
+
+Added support for DeepSeek V3 ($0.90 per 1M tokens) and DeepSeek R1 ($3/$7 per 1M tokens for input/output). The playground now properly displays reasoning output for DeepSeek R1 models, supporting both `reasoning_content` and `reasoning` response formats.
+
+### Improved Model Discovery
+
+Model cards now display "Try in Playground" buttons only for generative models, with consistent visual alignment. Models are identified by name rather than URL, allowing multiple models to share the same inference router endpoint.
+
+### GPU VM Creation Workflow
+
+When the GPU feature flag is enabled, the VM creation page now splits into separate "Create Virtual Machine" and "Create GPU Virtual Machine" options. This makes it easier to find and configure GPU instances without scrolling through non-GPU options.
+
+<PrList ids={[3424, 3417, 3529, 3537, 3455, 3467, 3478]} />
+
+## Ubicloud Kubernetes
+
+### Services Load Balancer Integration
+
+Kubernetes clusters now create a dedicated load balancer for services during cluster provisioning, replacing the previous name-based lookup system with a proper foreign key reference. This improves reliability and simplifies the architecture for service-to-load-balancer port mapping.
+
+### Faster E2E Testing
+
+End-to-end test timeouts have been reduced from 105 to 60 minutes thanks to improved MinIO cluster stability and faster boot image downloads, allowing for quicker validation of cluster deployments.
+
+<PrList ids={[3506, 3428]} />
+
+## Platform Improvements
+
+### Billing Rate Updates
+
+Updated billing rates for AWS regions, with new support for us-west-2. The rates now properly reflect full pricing including storage and backup costs integrated into CPU pricing for PostgreSQL resources.
+
+### Network Performance
+
+The platform now uses more efficient IP address allocation with a new `ipv4_address` table, reducing query overhead and improving VM provisioning speed. The veth pair IP selection algorithm has been optimized to avoid recursion and reduce memory usage.
+
+<PrList ids={[3435, 3464, 3438, 3483, 3484, 3503, 3524]} />

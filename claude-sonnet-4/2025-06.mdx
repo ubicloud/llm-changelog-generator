@@ -1,0 +1,119 @@
+---
+title: "June 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## GitHub Runners
+
+### Premium Runner Enhancements
+
+Premium GitHub runners now support better VM pool utilization and provide more flexible labeling options for simplified configuration. Performance improvements include increased utilization limits and streamlined quota management for better resource allocation.
+
+<PrList ids={[3328, 3403, 3421, 3422]} />
+
+### Runner Image Updates and Deprecation
+
+New runner image version 20250622.1.0 is now available with updated features and security improvements. Ubuntu 20.04 runner images have been deprecated as part of our commitment to supporting current LTS versions.
+
+<PrList ids={[3507, 3414]} />
+
+### Improved Runner Management
+
+Enhanced runner lifecycle management with better recycling deadlines, improved error handling for deleted runners, and optimized Docker Hub quota monitoring with configurable timeouts.
+
+<PrList ids={[3469, 3425]} />
+
+## Managed PostgreSQL
+
+### PostgreSQL Configuration Management
+
+Ubicloud PostgreSQL now provides comprehensive configuration management for both PostgreSQL and PgBouncer settings. Users can customize database parameters through the API with built-in validation for PostgreSQL versions 16 and 17.
+
+<PrList ids={[3474]} />
+
+### User Interface Revamp
+
+The PostgreSQL management interface has been completely redesigned with dedicated pages for different features including Overview, Connections, Backups, Charts, Networking, and Settings. This improves navigation and provides better access to specific functionality.
+
+<PrList ids={[3446]} />
+
+### Performance and Storage Improvements
+
+Performance enhancements include hugepage configuration for larger instances, backup time caching for improved restore performance, and optimized connection string formatting with explicit port and database information.
+
+<PrList ids={[3405, 3431, 3402]} />
+
+### AWS Integration
+
+Added support for multiple AWS regions including us-west-2, with S3 SDK integration for backup operations and enhanced multi-region PostgreSQL deployment capabilities.
+
+<PrList ids={[3423, 3464, 3512, 3531, 3535]} />
+
+## AI & GPUs
+
+### Enhanced Inference Playground
+
+The inference playground has been significantly upgraded with multi-turn conversation support, system message configuration, and real-time response rendering. Users can now adjust temperature and top-P parameters while viewing token usage statistics.
+
+<PrList ids={[3424, 3436, 3455, 3537]} />
+
+### Model Catalog Improvements
+
+Updated model cards now display more readable names using display_name tags, with improved button alignment and selective visibility for generative models. DeepSeek V3 and R1 models are now available with competitive pricing.
+
+<PrList ids={[3417, 3529]} />
+
+## Compute (VMs and Infrastructure)
+
+### GPU Virtual Machine Creation
+
+Introduced specialized GPU VM creation workflow behind a feature flag, providing dedicated interfaces for GPU and non-GPU virtual machine provisioning to simplify the selection process for GPU instances.
+
+<PrList ids={[3467, 3478]} />
+
+### Storage Backend Innovation
+
+Added support for Ubiblk as an alternative storage backend to SPDK, providing improved performance and resource utilization. The system intelligently selects between SPDK and Ubiblk based on host configuration and availability.
+
+<PrList ids={[3432, 3440, 3449, 3504, 3509, 3510]} />
+
+### Network Infrastructure Optimization
+
+Improved IPv4 address allocation with enhanced database-backed lookups and optimized host network management. Better handling of provider-specific network configurations including Leaseweb support.
+
+<PrList ids={[3438, 3434, 3522, 3524, 3525]} />
+
+## Ubicloud Kubernetes
+
+### Service Load Balancer Integration
+
+Kubernetes clusters now include proper foreign key references to services load balancers, with service LB creation moved to cluster-level management for better resource organization and lifecycle management.
+
+<PrList ids={[3506]} />
+
+### Operational Improvements
+
+Enhanced cluster management with copyable service URLs for easier access and improved operational workflows for cluster administrators.
+
+<PrList ids={[3480]} />
+
+## Other Services
+
+### Monitoring and Metrics
+
+Introduced comprehensive monitoring capabilities with Grafana installation support, VictoriaMetrics integration for VM host metrics collection, and node_exporter setup for system-level monitoring across the infrastructure.
+
+<PrList ids={[3407, 3416]} />
+
+### System Performance Optimization
+
+Significant improvements to the dispatcher and respirate systems include better thread management, enhanced metrics collection, and optimized strand processing with reduced database load through intelligent scheduling.
+
+<PrList ids={[3447, 3459, 3468, 3471, 3501, 3508, 3511, 3514, 3526, 3527]} />
+
+### Billing and Security
+
+Enhanced billing rate management with updated AWS pricing, improved error handling for payment methods, and better Cloudflare Turnstile integration for account security.
+
+<PrList ids={[3435, 3415, 3418, 3532]} />
