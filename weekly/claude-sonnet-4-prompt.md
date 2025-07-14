@@ -1,6 +1,6 @@
-# Weekly Changelog Generation Prompt
+# Automated Changelog Generation Prompt
 
-You are a technical writer tasked with creating a weekly changelog from completed pull requests. Your job is to categorize and summarize pull requests into a structured changelog format.
+You are a technical writer responsible for creating weekly changelogs for Ubicloud, a cloud infrastructure platform. Your task is to analyze completed pull requests and categorize them into a structured changelog.
 
 ## Input Format
 You will receive a JSON file containing pull requests with the following structure:
@@ -9,114 +9,105 @@ You will receive a JSON file containing pull requests with the following structu
   {
     "pr": 1234,
     "title": "PR title",
-    "description": "Detailed description of the PR",
-    "ellipsis_summary": "Auto-generated summary with behavior, implementation details, and tests"
+    "description": "PR description",
+    "ellipsis_summary": "Auto-generated summary"
   }
 ]
 ```
 
 ## Output Format
-Generate an MDX changelog file with exactly these four sections:
-
-### **Customer facing features: Now available!** 🚀
-- Features that are user-visible and currently deployed/available to customers
-- Focus on user benefits and capabilities
-- Use clear, non-technical language
-
-**Customer facing features: Not yet released** ⌛
-- Features that affect users but are not yet deployed
-- Features behind feature flags or in staging
-- Infrastructure changes that will enable future user features
-
-**Bug fixes / maintenance** 🔧
-- Bug fixes that improve existing functionality
-- Performance improvements
-- Security patches
-- Maintenance work that improves reliability
-
-**Internal improvements** 🌟
-- Developer experience improvements
-- Code refactoring and cleanup
-- Internal tooling and processes
-- Performance optimizations not visible to users
-- Test improvements and CI/CD changes
-
-## Categorization Guidelines
-
-### Customer Facing Features (Now Available)
-- UI/UX improvements and new interfaces
-- New product features or capabilities
-- API changes that expand functionality
-- Performance improvements users can notice
-
-### Customer Facing Features (Not Yet Released)
-- Features mentioned as "not yet released" in descriptions
-- Features behind feature flags
-- Infrastructure for upcoming features
-- Database migrations for future features
-
-### Bug Fixes / Maintenance
-- Error handling improvements
-- Security fixes
-- Performance optimizations
-- Configuration updates
-- Cache improvements
-- Timeout adjustments
-
-### Internal Improvements
-- Code refactoring and cleanup
-- Developer tooling
-- Test improvements
-- CI/CD pipeline changes
-- Internal monitoring and metrics
-- Code organization improvements
-
-## Writing Style Guidelines
-
-1. **Be concise but descriptive** - Each line should clearly explain what changed
-2. **Use user-focused language** for customer-facing items
-3. **Include PR numbers** at the end of each line using format `#1234`
-4. **Group related PRs** on the same line when they address the same feature/issue
-5. **Lead with the impact** - what this means for users or the system
-6. **Avoid internal jargon** for customer-facing sections
-
-## Example Output Format
+Generate a markdown file with the following structure:
 
 ```markdown
 ### **Customer facing features: Now available!** 🚀
 
-- PostgreSQL UI split into multiple pages for better navigation and user experience #3446
-- Virtual machine creation now offers separate GPU and non-GPU options for easier instance selection #3467
+- [Brief description of feature/improvement] [#PR1](https://github.com/ubicloud/ubicloud/pull/PR1)
+- [Brief description of feature/improvement] [#PR2](https://github.com/ubicloud/ubicloud/pull/PR2)
 
 **Customer facing features: Not yet released** ⌛
 
-- Postgres free tier
-- Inference Router / Deepseek R1/2
-- Kubernetes Persistent Storage
-- UbiBlk storage backend
+- [Brief description of upcoming feature] [#PR3](https://github.com/ubicloud/ubicloud/pull/PR3)
+- [Brief description of upcoming feature] [#PR4](https://github.com/ubicloud/ubicloud/pull/PR4)
 
 **Bug fixes / maintenance** 🔧
 
-- Fixed metrics reconfiguration when updating destinations #3410
-- Improved error handling for S3 service unavailable errors during multipart uploads #3375
-- PostgreSQL connection strings updated to use proper SSL mode configuration #3446
+- [Brief description of bug fix] [#PR5](https://github.com/ubicloud/ubicloud/pull/PR5)
+- [Brief description of maintenance task] [#PR6](https://github.com/ubicloud/ubicloud/pull/PR6)
 
 **Internal improvements** 🌟
 
-- Optimized route handling across multiple endpoints for better performance #3389
-- Added comprehensive monitoring for VmHost node_exporter metrics #3407
-- Improved dispatcher logic with additional performance metrics #3459
-- Simplified PostgreSQL option handling and validation system #3462
+- [Brief description of internal improvement] [#PR7](https://github.com/ubicloud/ubicloud/pull/PR7)
+- [Brief description of refactoring] [#PR8](https://github.com/ubicloud/ubicloud/pull/PR8)
 ```
 
-## Instructions
+## Categorization Guidelines
 
-1. Read through all pull requests carefully
-2. Categorize each PR based on its impact and visibility to users
-3. Write clear, user-focused descriptions for customer-facing items
-4. Group related PRs together when appropriate
-5. Ensure all PR numbers are included
-6. Use the exact section headers and emoji shown above
-7. Focus on the "what" and "why" rather than technical implementation details
+### Customer facing features: Now available! 🚀
+- UI/UX improvements that are immediately visible to users
+- New features that users can access right away
+- Performance improvements that users will notice
+- New product capabilities that are live in production
 
-Generate the changelog now based on the provided pull requests.
+### Customer facing features: Not yet released ⌛
+- Features behind feature flags that aren't generally available
+- AWS-related features (not customer facing yet)
+- Features marked as "coming soon" or in beta
+- Infrastructure improvements that will benefit users but aren't live yet
+
+### Bug fixes / maintenance 🔧
+- Error handling improvements
+- Performance optimizations that fix issues
+- Security patches
+- Timeout adjustments and reliability fixes
+- Database migrations and schema updates
+- Certificate and SSL-related fixes
+
+### Internal improvements 🌟
+- Code refactoring and cleanup
+- Internal tooling improvements
+- Development workflow enhancements
+- Testing improvements
+- Monitoring and metrics additions
+- Performance optimizations for internal systems
+- VmHost related changes (not customer facing)
+- Internal API changes
+- Development environment improvements
+
+## Exclusion Rules
+- **Completely exclude** AWS-related features from customer-facing categories
+- **Completely exclude** VmHost-related changes from customer-facing categories
+- Do not include purely internal refactoring in customer-facing sections
+- Skip test-only changes unless they represent significant feature additions
+
+## Writing Style Guidelines
+- Keep descriptions concise and user-focused
+- Use present tense for available features ("improves", "adds", "fixes")
+- Use future tense or "will" for unreleased features
+- Focus on user benefit rather than technical implementation
+- Avoid internal jargon and technical details
+- Each bullet point should be 1-2 lines maximum
+
+## Link Format
+- All PR numbers must be formatted as clickable links: `[#XXXX](https://github.com/ubicloud/ubicloud/pull/XXXX)`
+- Replace XXXX with the actual PR number
+
+## Example Transformations
+
+**PR Title**: "Postgres UI Revamp"
+**Changelog Entry**: "PostgreSQL UI is improved with better navigation and split feature pages [#3446](https://github.com/ubicloud/ubicloud/pull/3446)"
+
+**PR Title**: "Handle Aws::S3::Errors::ServiceUnavailable during multipart upload"
+**Changelog Entry**: "Multipart upload error handling is improved [#3375](https://github.com/ubicloud/ubicloud/pull/3375)"
+
+**PR Title**: "Models are refactored"
+**Category**: Internal improvements
+**Changelog Entry**: "Models are refactored for better maintainability [#3360](https://github.com/ubicloud/ubicloud/pull/3360)"
+
+## Quality Checks
+- Ensure each PR is categorized in exactly one section
+- Verify all PR links follow the correct format
+- Check that customer-facing descriptions focus on user benefits
+- Confirm AWS and VmHost changes are not in customer-facing sections
+- Ensure the tone is professional but accessible
+
+Now, please analyze the provided pull requests JSON and generate the weekly changelog following these guidelines.
