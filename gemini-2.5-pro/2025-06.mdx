@@ -1,0 +1,125 @@
+---
+title: "June 2025"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+Welcome to the June 2025 changelog! This month, we're excited to announce a major redesign of our PostgreSQL UI, native AWS S3 integration for backups, a completely rebuilt AI Inference Playground, and a preview of our new high-performance block storage backend.
+
+## Platform
+
+### New High-Performance Block Storage (Preview)
+
+We are introducing Ubiblk, a new, high-performance vhost-user-blk storage backend, as a preview. This new backend is designed to deliver lower latency and higher throughput for I/O-intensive workloads. It also adds support for per-volume I/O bandwidth limits. Ubiblk is being rolled out and will become the default storage backend in the future.
+
+<PrList ids={[3432, 3433, 3440, 3449, 3504, 3505, 3509, 3510]} />
+
+### Host-Level Metrics & Monitoring Dashboard
+
+You can now monitor the health and performance of your underlying VM hosts. We've integrated `node_exporter` to collect detailed host-level metrics. A Grafana dashboard is also available to visualize this data, providing insights into CPU, memory, and disk usage for your compute infrastructure.
+
+<PrList ids={[3344, 3404, 3407, 3416]} />
+
+### Improved Sign-Up Error Handling
+
+We've improved the error messaging on our sign-up page. If the Cloudflare Turnstile verification fails (often due to disabled JavaScript or network blocks), you'll now see a clearer message explaining the potential cause.
+
+<PrList ids={[3532]} />
+
+## Managed PostgreSQL
+
+### Major UI Revamp and Navigation
+
+We've completely redesigned the PostgreSQL dashboard for a more intuitive and organized experience. Features are now logically grouped into dedicated pages for Overview, Connections, Backups, Networking, and more, making it easier to manage and monitor your databases. The CA certificate download link has also been fixed.
+
+![PostgreSQL UI Revamp](/changelog/2025-06-pg-revamp.png)
+
+<PrList ids={[3402, 3409, 3446, 3500]} />
+
+### Native AWS S3 Integration for Backups and Multi-Region Support
+
+You can now run Ubicloud PostgreSQL databases in multiple AWS regions, starting with `us-west-2`. This update includes native integration with AWS S3 for backup and restore operations, providing a more robust and scalable data protection solution for your AWS-hosted databases. We've also updated our billing rates to reflect this new capability.
+
+<PrList ids={[3423, 3435, 3456, 3464, 3512]} />
+
+### Larger Instance Sizes on AWS
+
+To support larger workloads, we've added `standard-32` (m6id.8xlarge) and `standard-64` (m6id.16xlarge) instance sizes for PostgreSQL databases running on AWS.
+
+<PrList ids={[3531, 3535]} />
+
+### Performance Boost with Huge Pages
+
+PostgreSQL instances now leverage Linux huge pages, which can significantly improve performance by reducing memory management overhead for large databases. This feature is enabled automatically to optimize your database performance.
+
+<PrList ids={[3405]} />
+
+### ParadeDB Support (Preview)
+
+We've added experimental support for ParadeDB (formerly Lantern), an open-source PostgreSQL distribution built for real-time search and analytics. This feature is available as a preview and can be enabled via a feature flag.
+
+<PrList ids={[3382]} />
+
+## Github Runners
+
+### 100 GB Free Cache for Premium Runner Users
+
+To improve build speeds and reduce costs, customers using premium runners now receive 100 GB of free cache storage per month.
+
+<PrList ids={[3473]} />
+
+### Simplified Labels for Premium Runners
+
+We've introduced shorter, more convenient aliases for premium runner labels. For example, you can now use `ubicloud-premium-8` instead of the longer `ubicloud-premium-8-ubuntu-2204`.
+
+<PrList ids={[3403]} />
+
+### Increased Concurrency and Improved Reliability
+
+We've fine-tuned our runner scheduling by increasing the utilization limit from 70% to 75%, allowing for higher concurrency. We've also improved the runner recycling logic to better handle transient API errors and prevent stuck runners.
+
+<PrList ids={[3328, 3421, 3469]} />
+
+### Runner Image Updates
+
+The new `20250622.1.0` runner image is now available, bringing the latest updates and security patches. As part of our regular maintenance, the `ubuntu-20.04` based runner images have been deprecated and removed.
+
+<PrList ids={[3414, 3507]} />
+
+## AI & GPUs
+
+### Inference Playground V2 with Multi-Turn Conversations
+
+The Inference Playground has been completely rebuilt. It now supports multi-turn conversations, allowing for more interactive and stateful testing of models. You can also now configure system messages, temperature, and Top-P settings, with real-time token streaming and usage statistics.
+
+![Inference Playground V2](/changelog/2025-06-playground-v2.png)
+
+<PrList ids={[3417, 3424, 3436, 3455]} />
+
+### New DeepSeek Models Available
+
+We've expanded our model catalog with two new high-performance models: DeepSeek-V2 and the research-focused DeepSeek-V1-Chat. These models are now available in the Inference Playground and via the API.
+
+<PrList ids={[3529, 3537]} />
+
+### Simplified GPU Virtual Machine Creation (Preview)
+
+We've introduced a new, streamlined workflow for creating GPU-powered Virtual Machines. When enabled, the UI presents a dedicated "Create GPU Virtual Machine" page that intelligently filters options to only show compatible instance types, operating systems, and locations. This feature is currently in preview.
+
+![GPU VM Create Flow](/changelog/2025-06-gpu-vm-create.png)
+
+<PrList ids={[3467, 3478]} />
+
+## Ubicloud Kubernetes
+
+### Corrected Worker Node Pricing
+
+We've fixed a bug in the Kubernetes pricing calculator that was using an incorrect default storage size for worker nodes. The pricing displayed in the UI now accurately reflects the provisioned resources.
+
+<PrList ids={[3386]} />
+
+### Automatic Service Load Balancer Creation
+
+To simplify service exposure, a service Load Balancer is now automatically created and associated with your Kubernetes cluster upon creation, streamlining the process of making your applications accessible. We've also added a convenient copy button for the service URL in the UI.
+
+<PrList ids={[3480, 3506]} />
