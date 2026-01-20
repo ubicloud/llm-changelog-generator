@@ -1,51 +1,63 @@
-### 2025-07-08
+## 2026-01-13
 
 **Customer facing features: Now available\! 🚀**
 
-* **OIDC authentication** support is now available with dynamic client registration for enterprise login, starting with Moonpay with Okta  [\#3543](https://github.com/ubicloud/ubicloud/pull/3543)  
-* **Kubernetes CLI support (v0.1)** is now available with list and create commands [\#3429](https://github.com/ubicloud/ubicloud/pull/3429)  
-* New GitHub runner instances get a **free 7-day premium** upgrade with improved UI badges [\#3523](https://github.com/ubicloud/ubicloud/pull/3523)  
-* CLI error messages are improved with better validation and help output [\#3513](https://github.com/ubicloud/ubicloud/pull/3513)  
-* PostgreSQL failover functionality is enhanced with better planned and unplanned failover handling [\#3575](https://github.com/ubicloud/ubicloud/pull/3575)  
-* PostgreSQL cron background workers are enabled by default [\#3552](https://github.com/ubicloud/ubicloud/pull/3552)  
-* Read replica creation is now restricted to databases with existing backups [\#3581](https://github.com/ubicloud/ubicloud/pull/3581)
+* Included the `created_at` field in the PostgreSQL list API to support sorting and improve general observability [\#4496](https://github.com/ubicloud/ubicloud/pull/4496)  
+* Added `pg_config` & `pgbouncer_config` to endpoints for creating read replicas [\#4527](https://github.com/ubicloud/ubicloud/pull/4527)  
+* Added a "deleting" state for private subnets to clearly indicate when a resource is in the process of being destroyed [\#4532](https://github.com/ubicloud/ubicloud/pull/4532)
 
-**Customer facing features: Not yet released** ⌛
+**External Communication** 📣
 
-* New AWS instance types (c6gd, m6gd, m8gd) are added for enhanced performance options [\#3540](https://github.com/ubicloud/ubicloud/pull/3540)  
-* PostgreSQL configuration backend will allow advanced database tuning [\#3474](https://github.com/ubicloud/ubicloud/pull/3474)  
-* Kubernetes CSI  
-* OCR  
-* UbiBLK
+* Dec 2025 Changelog
 
-**Bug fixes / maintenance** 🔧
+**Customer facing features: Not yet released ⌛**
 
-* \[PG\] PostgreSQL hugepage allocation is fixed to only occur during initial provisioning [\#3536](https://github.com/ubicloud/ubicloud/pull/3536)  
-* \[PG\] Primary server configuration is fixed after removing standby nodes [\#3564](https://github.com/ubicloud/ubicloud/pull/3564)  
-* \[PG\] Primary server handling is improved when destroyed during read replica creation [\#3566](https://github.com/ubicloud/ubicloud/pull/3566)  
-* \[PG\] Representative server fencing is improved with immediate termination [\#3562](https://github.com/ubicloud/ubicloud/pull/3562)  
-* \[PG\] Maintenance window parameter handling is fixed to accept zero values [\#3576](https://github.com/ubicloud/ubicloud/pull/3576)  
-* \[PG\] S3 endpoint errors are handled to prevent UI crashes [\#3582](https://github.com/ubicloud/ubicloud/pull/3582)  
-* \[PG\] WAL file replication is ensured during server transitions [\#3580](https://github.com/ubicloud/ubicloud/pull/3580)  
-* \[PG\] WALG credentials bug is fixed for read replicas after promotion [\#3542](https://github.com/ubicloud/ubicloud/pull/3542)  
-* \[AWS\] AWS API call safeguards are added to prevent operation failures [\#3548](https://github.com/ubicloud/ubicloud/pull/3548)  
-* \[AWS\] PostgreSQL data disk device path detection is fixed on AWS [\#3563](https://github.com/ubicloud/ubicloud/pull/3563)  
-* \[AWS\] Error handling is improved for AWS entity deletion operations [\#3559](https://github.com/ubicloud/ubicloud/pull/3559)  
-* \[AWS\] Lots of Ubi on AWS related fixes [\#3560](https://github.com/ubicloud/ubicloud/pull/3560)  
-* \[GHA\] GitHub runner JIT token corruption logging is improved for better debugging [\#3549](https://github.com/ubicloud/ubicloud/pull/3549)  
-* \[GHA\] Blob storage destruction error handling is enhanced [\#3556](https://github.com/ubicloud/ubicloud/pull/3556)  
-* \[Networking\] NIC destruction redundancy is removed to prevent double processing [\#3561](https://github.com/ubicloud/ubicloud/pull/3561)  
-* \[Bump\] Tilt gem is updated to version 2.6.1 for parallel testing fixes [\#3585](https://github.com/ubicloud/ubicloud/pull/3585)
+* Dist Inference  
+* Clickhouse  
+* UbiBLK  
+  * Configured `ubiblk` as the default storage backend for all newly provisioned hosts [\#4534](https://github.com/ubicloud/ubicloud/pull/4534)
 
-**Internal improvements** 🌟
+**Bug fixes / maintenance / internals 🔧**
 
-* \[Clover\] Database locking is improved to reduce unnecessary blocking [\#3545](https://github.com/ubicloud/ubicloud/pull/3545)	  
-* \[CI\] Clover workflow environment setup is unified with shared actions [\#3399](https://github.com/ubicloud/ubicloud/pull/3399)  
-* \[CI\] Control plane tests now run in parallel for faster CI execution [\#3555](https://github.com/ubicloud/ubicloud/pull/3555)  
-* \[CI\] E2E tests are enhanced with mail server and Stripe test configurations [\#3571](https://github.com/ubicloud/ubicloud/pull/3571)  
-* \[CI\] E2E test performance is improved with dual respirate processes [\#3572](https://github.com/ubicloud/ubicloud/pull/3572)  
-* \[GHA\] GitHub runner script service descriptions are made explicit for security [\#3551](https://github.com/ubicloud/ubicloud/pull/3551)  
-* \[GHA\] JIT configuration is now passed via file for better reliability [\#3570](https://github.com/ubicloud/ubicloud/pull/3570)  
-* \[CLI\] Golden file handling is improved for case-insensitive filesystems [\#3547](https://github.com/ubicloud/ubicloud/pull/3547)  
-* \[PG\] Bootstrap rhizome waiting time is reduced from 120 to 5 seconds [\#3565](https://github.com/ubicloud/ubicloud/pull/3565)  
-* \[AWS\] Subnet and NIC operations are optimized for AWS locations [\#3574](https://github.com/ubicloud/ubicloud/pull/3574)
+* **PostgreSQL**  
+  * Implemented monitoring for PostgreSQL archival backlogs to trigger alerts when WAL files exceed thresholds [\#4487](https://github.com/ubicloud/ubicloud/pull/4487)  
+  * Updated the `paradedb` image to include the `wal-g` service file [\#4506](https://github.com/ubicloud/ubicloud/pull/4506)  
+  * Updated `PostgresResourceNexus.assemble` to accept tags [\#4495](https://github.com/ubicloud/ubicloud/pull/4495)  
+  * Fixed a bug in `wal-g` where stale credentials were used when switching to a new PostgreSQL timeline [\#4520](https://github.com/ubicloud/ubicloud/pull/4520)  
+  * Resolved a `NoMethodError` on the PostgreSQL creation page when selecting unsupported flavors [\#4521](https://github.com/ubicloud/ubicloud/pull/4521)  
+  * Handled cases where `lsn_monitor` is nil during PostgreSQL failover target selection [\#4524](https://github.com/ubicloud/ubicloud/pull/4524)  
+  * Corrected the sha256 checksum for the `postgres_paradedb` image [\#4510](https://github.com/ubicloud/ubicloud/pull/4510)  
+* **Networking**  
+  * Improved random IP selection by switching from infinite recursion to bounded iteration [\#4371](https://github.com/ubicloud/ubicloud/pull/4371)  
+  * Added retry logic and safety deadlines for AWS network interface and security group deletion to handle transient "in use" errors [\#4493](https://github.com/ubicloud/ubicloud/pull/4493)  
+  * Introduced a configuration option to limit SSH access to specific IP ranges, enhancing security for private environments [\#4509](https://github.com/ubicloud/ubicloud/pull/4509)  
+* **Framework**  
+  * Refactored state machine logic to use a centralized `destroying` semaphore for label checks [\#4317](https://github.com/ubicloud/ubicloud/pull/4317), [\#4480](https://github.com/ubicloud/ubicloud/pull/4480)  
+  * Optimized `Clog.emit` to accept metadata as an argument instead of a block to improve performance [\#4523](https://github.com/ubicloud/ubicloud/pull/4523), [\#4525](https://github.com/ubicloud/ubicloud/pull/4525)  
+  * Removed unnecessary Sequel association options [\#4488](https://github.com/ubicloud/ubicloud/pull/4488) [\#4366](https://github.com/ubicloud/ubicloud/pull/4366) [\#4539](https://github.com/ubicloud/ubicloud/pull/4539)  
+  * Added a `before_destroy` callback to the base progress class to handle one-time cleanup logic [\#4485](https://github.com/ubicloud/ubicloud/pull/4485)  
+  * Corrected the `display_state` method to properly handle the destroying semaphore across multiple models [\#4474](https://github.com/ubicloud/ubicloud/pull/4474)  
+  * Updated KMS key handling to avoid unnecessary base64 decoding [\#4515](https://github.com/ubicloud/ubicloud/pull/4515)  
+  * Added a database constraint to prevent negative hugepage deallocation [\#4529](https://github.com/ubicloud/ubicloud/pull/4529)  
+  * Optimized `Util.exception_to_hash` to reduce hash allocations and support nested exception causes [\#4465](https://github.com/ubicloud/ubicloud/pull/4465)  
+  * Fixed double-nested exception logging [\#4511](https://github.com/ubicloud/ubicloud/pull/4511)  
+  * Fixed an issue where `PageNexus.assemble` would ignore updates to existing active pages [\#4449](https://github.com/ubicloud/ubicloud/pull/4449)  
+  * Updated `openssl` to version 4.0.0 and simplified exception handling for public keys [\#4499](https://github.com/ubicloud/ubicloud/pull/4499)  
+  * Added `Sshable#write_file` to standardize file writing operations over SSH [\#4516](https://github.com/ubicloud/ubicloud/pull/4516)  
+  * Added UUID type validation to configuration for earlier error detection [\#4498](https://github.com/ubicloud/ubicloud/pull/4498)  
+  * Remove LocationCredential project association [\#4500](https://github.com/ubicloud/ubicloud/pull/4500)  
+* **Admin**  
+  * Added a new admin page to search for VMs by IPv4 address, covering both active and recently archived instances [\#4505](https://github.com/ubicloud/ubicloud/pull/4505)  
+  * Enhanced the admin panel by adding billing and payment method tables and converting raw Stripe JSON data into a readable format [\#4517](https://github.com/ubicloud/ubicloud/pull/4517)  
+* **Dev**  
+  * Updated PostgreSQL dependency instructions for Debian/Ubuntu to include `pkg-config` [\#4315](https://github.com/ubicloud/ubicloud/pull/4315)  
+  * Slack messages to remind PRs waiting for reviews\!  
+* **Fleet**  
+  * Added a `VmHost` health check to verify the clock source is set to `tsc` or `arch_sys_counter`, preventing monotonic time errors [\#4419](https://github.com/ubicloud/ubicloud/pull/4419)  
+* **Tests**  
+  * Backported FDR demock changes [\#4476](https://github.com/ubicloud/ubicloud/pull/4476)  
+  * Replaced heavy mocks with real objects in `postgres_server_nexus_spec` [\#4503](https://github.com/ubicloud/ubicloud/pull/4503)  
+  * Fixed flaky tests related to `Clog` emissions in `vpc_nexus_spec.rb` [\#4508](https://github.com/ubicloud/ubicloud/pull/4508)  
+* **Version bumps**  
+  * Upgraded Ruby development dependencies, including `concurrent-ruby`, `herb`, `prism`, and `unicode-emoji` [\#4477](https://github.com/ubicloud/ubicloud/pull/4477)  
+  * Upgraded JavaScript dependencies including `@redocly/cli`, `openapi-format`, and `undici` [\#4491](https://github.com/ubicloud/ubicloud/pull/4491)
