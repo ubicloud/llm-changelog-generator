@@ -217,7 +217,7 @@ Instead, we did the following:
 Here's how you can reproduce our experiment step by step:
 
 ```
-python3 pr_reporter.py ubicloud/ubicloud 2025-05-01 2025-05-31 -o may-pull-requests.json
+uv run pr_reporter.py ubicloud/ubicloud 2025-05-01 2025-05-31 -o may-pull-requests.json
 ```
 
 Then, go to your favorite LLM, copy/paste the prompt in
