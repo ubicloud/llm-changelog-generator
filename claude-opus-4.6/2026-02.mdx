@@ -1,0 +1,123 @@
+---
+title: "February 2026"
+---
+
+import { PrList } from "/snippets/pr-list.mdx";
+
+## Managed PostgreSQL
+
+### Storage Auto-Scaling
+
+Ubicloud Managed PostgreSQL now automatically scales up storage when disk usage gets high. When your database reaches critical thresholds, the system resizes storage without manual intervention — keeping your database available even during unexpected data growth. Hobby-tier databases that hit their storage ceiling are automatically upgraded to the standard tier so they can continue scaling.
+
+<PrList ids={[4730, 4754, 4755, 4783, 4798]} />
+
+### Hobby Tier
+
+Burstable PostgreSQL instances have been renamed to "hobby" to better signal that these instances are intended for development, experimentation, and non-production workloads.
+
+<PrList ids={[4738, 4759]} />
+
+### Failover Testing with /recycle
+
+You can now trigger a failover on your PostgreSQL instance via the new `/recycle` API endpoint. This lets you test your application's resilience to failovers in a controlled way.
+
+<PrList ids={[4703]} />
+
+### Transaction-Mode PgBouncer by Default
+
+New PostgreSQL instances now default to PgBouncer's `transaction` pool mode, which allows better connection reuse. Existing instances are unaffected — their pool mode has been preserved as `session`.
+
+<PrList ids={[4769]} />
+
+### Restart Requirement Indicators for Config Parameters
+
+The PostgreSQL configuration UI now shows which parameters require a database restart to take effect. This helps you plan configuration changes and understand when a restart is needed.
+
+<!-- TODO: add screenshot -->
+![Restart requirement indicators](/changelog/2026-02-pg-restart-indicator.png)
+
+<PrList ids={[4772]} />
+
+### IPv6 (AAAA) Records for Older Databases
+
+A new option in the web console lets you add AAAA DNS records to PostgreSQL databases created before IPv6 support was available, making it easy to enable IPv6 connectivity on older instances.
+
+<PrList ids={[4696]} />
+
+### Replication via the postgres User
+
+You can now set up logical or physical replication connections using the `postgres` user, simplifying replication configuration for advanced use cases.
+
+<PrList ids={[4750]} />
+
+<PrList ids={[4684, 4689, 4681, 4719, 4724, 4726, 4749, 4764, 4775, 4794, 4760, 4761]} />
+
+## GitHub Runners
+
+### Usage Summary Dashboard
+
+The GitHub runner dashboard now includes a usage summary showing your allocated vCPUs, requested vCPUs, today's cost, and your cost over the last 30 days — giving you clear visibility into runner utilization and spend at a glance.
+
+<!-- TODO: add screenshot -->
+![Runner usage summary](/changelog/2026-02-runner-usage-summary.png)
+
+<PrList ids={[4731]} />
+
+### Improved Onboarding Experience
+
+The empty state for new GitHub runner users has been redesigned with a structured step-by-step setup guide, making it faster and clearer to get your first runner up and running.
+
+<!-- TODO: add screenshot -->
+![Runner onboarding empty state](/changelog/2026-02-runner-onboarding.png)
+
+<PrList ids={[4733]} />
+
+### Updated Runner Image
+
+Runner images have been updated to version `20260202.1.0` with the latest tooling and security patches.
+
+<PrList ids={[4706, 4770]} />
+
+## Ubicloud Kubernetes
+
+### Mesh Connectivity Monitoring
+
+Kubernetes clusters now include built-in mesh network connectivity monitoring. The CSI node plugin periodically checks TCP connectivity between pods across nodes and to external endpoints, enabling faster detection and alerting of network isolation issues.
+
+<PrList ids={[4702, 4704, 4720, 4722, 4742, 4766, 4828]} />
+
+### Improved Node Lifecycle Reliability
+
+Several improvements make node upgrades and scaling more reliable: firewall rules now persist across node reboots, CSI data migrations retry on failure instead of getting stuck, and kubelet certificate approval is properly sequenced during node provisioning.
+
+<PrList ids={[4741, 4768, 4829, 4834, 4849]} />
+
+<PrList ids={[4729]} />
+
+## Compute
+
+### Redesigned Firewall Rule UI
+
+The firewall rule management interface has been overhauled. Rules are now displayed in a clean read-only table, with a dedicated page for adding or editing rules. The new editor includes dropdowns for common ports and IP ranges, while still allowing full customization.
+
+<!-- TODO: add screenshot -->
+![Firewall rule UI](/changelog/2026-02-firewall-ui.png)
+
+<PrList ids={[4745]} />
+
+<PrList ids={[4715, 4808]} />
+
+## Billing & Account
+
+### Invoice Display Fix
+
+Fixed a bug where clicking on any invoice in the console would always show the most recent invoice instead of the selected one. Invoices now display correctly.
+
+<PrList ids={[4701]} />
+
+### Load Balancer DNS Fix
+
+Fixed an issue where adding ports to a load balancer could result in missing DNS records due to a race condition during service creation.
+
+<PrList ids={[4788]} />
